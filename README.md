@@ -5,4 +5,3 @@
 
 ### **About micropython-neuronum**
 The micropython implementation of the neuronum client library (https://pypi.org/project/neuronum/) - in development and tested on the ESP32
-
