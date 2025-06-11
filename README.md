@@ -4,4 +4,17 @@
 
 
 ### **About micropython-neuronum**
-The micropython implementation of the neuronum client library (https://pypi.org/project/neuronum/) - in development and tested on the ESP32
+The **MicroPython implementation** of the [Neuronum client library](https://pypi.org/project/neuronum/) — actively developed and tested on ESP32.
+
+### **Installation**
+Ensure your MicroPython device is **connected to Wi-Fi** before installation.
+
+```python
+import mip
+mip.install("github:neuronumcybernetics/micropython-neuronum")
+```
+
+Output:
+Downloading github:neuronumcybernetics/micropython-neuronum/micropython_neuronum.py to /lib
+Copying: /lib/micropython_neuronum.py
+Done
