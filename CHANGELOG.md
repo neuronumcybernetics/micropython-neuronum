@@ -1,7 +1,7 @@
 <h1 align="center">
   <img src="https://neuronum.net/static/neuronum.svg" alt="Neuronum" width="80">
 </h1>
-<h4 align="center">CHANGELOG of the Neuronum MicroPython library</h4>
+<h4 align="center">CHANGELOG of the Neuronum MicroPython Library</h4>
 
 <p align="center">
   <a href="https://neuronum.net">
@@ -17,9 +17,11 @@
 
 ---
 
-**The versions 0.1.0–5.4.2 are part of the Neuronum MVP (“v0.1 nucleus”) ecosystem. As these builds are evolving rapidly, detailed changelogs are not yet provided**
+## 🚀 Version 0.1.0
+### Added
+- `store()` function for storing data in a circuit context
+- `load()` function for retrieving data from circuit context
+- `activate_tx()` function for authenticated TX data push
 
-! The first stable release will follow CalVer semantics and receive periodic updates guided by transparent changelogs !
-
-
-
+### Changed
+- Refactored `stream()` to validate acknowledgment from receiver before completing transmission
