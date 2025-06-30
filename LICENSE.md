@@ -1,3 +1,22 @@
+<h1 align="center">
+  <img src="https://neuronum.net/static/neuronum.svg" alt="Neuronum" width="80">
+</h1>
+<h4 align="center">CHANGELOG of the Neuronum MicroPython Library</h4>
+
+<p align="center">
+  <a href="https://neuronum.net">
+    <img src="https://img.shields.io/badge/Website-Neuronum-blue" alt="Website">
+  </a>
+  <a href="https://github.com/neuronumcybernetics/micropython-neuronum">
+    <img src="https://img.shields.io/badge/Docs-Read%20now-green" alt="Documentation">
+  </a>
+  <a href="https://github.com/neuronumcybernetics/neuronum/blob/main/LICENSE.md">
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License">
+  </a>
+</p>
+
+---
+
 MIT License
 
 Copyright (c) [2025] [Neuronum Cybernetics UG (limited liability)]
