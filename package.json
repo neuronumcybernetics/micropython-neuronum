@@ -4,7 +4,7 @@
    "urls": [
     ["micropython_neuronum.py", "micropython_neuronum.py"],
     ["uwebsockets/client.py", "github:neuronumcybernetics/micropython-neuronum/uwebsockets/client.py"],
-    ["uwebsockets/protcol.py", "github:neuronumcybernetics/micropython-neuronum/uwebsockets/protcol.py"]
+    ["uwebsockets/protcol.py", "github:neuronumcybernetics/micropython-neuronum/uwebsockets/protocol.py"]
   ],
   "version": "0.2.0"
 }
