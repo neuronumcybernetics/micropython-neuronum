@@ -33,7 +33,7 @@ This will either create a /lib folder containing or add the following files to a
 - /uwebsockets/client.py
 - /uwebsockets/protocol.py
 
-## Acknowledgment
+#### Acknowledgment
 Big shout out to [Danni](https://github.com/danni/uwebsockets) for the awesome `uwebsockets` library—this project wouldn’t be possible without it!
 
 ### **Sync Stream Data in Real Time with your ESP** **[(More Examples Here)](https://github.com/neuronumcybernetics/micropython-neuronum/tree/main/examples)**
