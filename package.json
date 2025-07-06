@@ -3,8 +3,8 @@
    "description": "MicroPython implementation of the Neuronum client library",
    "urls": [
     ["micropython_neuronum.py", "micropython_neuronum.py"],
-    ["uwebsockets/client.py", "/uwebsockets/client.py"],
-    ["uwebsockets/protcol.py", "/uwebsockets/protcol.py"]
+    ["uwebsockets/client.py", "uwebsockets/client.py"],
+    ["uwebsockets/protcol.py", "uwebsockets/protcol.py"]
   ],
   "version": "0.2.0"
 }
