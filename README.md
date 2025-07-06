@@ -39,10 +39,10 @@ Create, upload, and run this sync.py file on your ESP
 import micropython_neuronum as neuronum
 
 cell = neuronum.Cell(
-    host="host",
-    password="password",
-    network="neuronum.net",
-    synapse="synapse"
+    host="host",                # replace with your cell host
+    password="password",        # replace with your cell password
+    network="neuronum.net",     # choose the network -> neuronum.net
+    synapse="synapse"           # replace with your cell synapse (auth token)
 )
 
 # Sync data of a public Stream (STX) gy3w11qAEibN::stx
