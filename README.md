@@ -27,3 +27,31 @@ Ensure your MicroPython device is **connected to Wi-Fi** before installation.
 import mip
 mip.install("github:neuronumcybernetics/micropython-neuronum")
 ```
+
+This will either create a /lib folder containing or add the following files to an existing /lib folder:
+- micropython_neuronum.py
+- /uwebsockets/client.py
+- /uwebsockets/protocol.py
+
+### **Sync Stream Data in Real Time with your ESP** **[(More Examples Here)](https://github.com/neuronumcybernetics/micropython-neuronum/tree/main/examples)**
+Create, upload, and run this sync.py file on your ESP
+```python
+import micropython_neuronum as neuronum
+
+cell = neuronum.Cell(
+    host="host",
+    password="password",
+    network="neuronum.net",
+    synapse="synapse"
+)
+
+# Sync data of a public Stream (STX) gy3w11qAEibN::stx
+STX = "gy3w11qAEibN::stx"
+for operation in cell.sync(STX):
+    label = operation.get("label")
+    data = operation.get("data")
+    ts = operation.get("time")
+    stxID = operation.get("stxID")
+    operator = operation.get("operator")
+    print(label, data, ts, stxID, operator)
+```
