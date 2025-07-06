@@ -3,8 +3,9 @@
   "version": "0.2.0",
   "description": "Neuronum Cybernetics MicroPython Client Library and Application",
   "urls": [
-    ["lib/micropython_neuronum.py", "github:neuronumcybernetics/micropython-neuronum/micropython_neuronum.py"],
-    ["lib/uwebsockets", "github:neuronumcybernetics/micropython-neuronum/uwebsockets"]
+    ["micropython_neuronum.py", "github:neuronumcybernetics/micropython-neuronum/micropython_neuronum.py"],
+    ["uwebsockets/client.py", "github:neuronumcybernetics/micropython-neuronum/uwebsockets/client.py"],
+    ["uwebsockets/protcol.py", "github:neuronumcybernetics/micropython-neuronum/uwebsockets/protcol.py"]
   ],
   "deps": []
 }
