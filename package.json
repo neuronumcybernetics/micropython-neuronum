@@ -1,5 +1,20 @@
 {
-    "version": "0.1.0",
-    "files": ["micropython_neuronum.py"],
-    "destination": "/lib"
+    "name": "micropython-neuronum-client",
+    "version": "0.2.0",
+    "description": "MicroPython implementation of the Neuronum client library",
+
+    "files": [],
+
+    "deps": [
+        "neuronum-client-lib",
+        "uwebsockets"
+    ],
+    "urls": {
+        "neuronum-client-lib": "./micropython_neuronum.py", 
+        "uwebsockets": "./uwebsockets" 
+    },
+    "install_paths": {
+        "neuronum-client-lib": "lib/micropython_neuronum.py",
+        "uwebsockets": "lib/uwebsockets"
+    }
 }

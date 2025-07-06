@@ -25,10 +25,5 @@ Ensure your MicroPython device is **connected to Wi-Fi** before installation.
 
 ```python
 import mip
-mip.install("github:neuronumcybernetics/micropython-neuronum/micropython_neuronum.py")
+mip.install("github:neuronumcybernetics/micropython-neuronum")
 ```
-
-Output:
-Downloading github:neuronumcybernetics/micropython-neuronum/micropython_neuronum.py to /lib
-Copying: /lib/micropython_neuronum.py
-Done

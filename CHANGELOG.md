@@ -17,6 +17,10 @@
 
 ---
 
+## 🚀 Version 0.2.0
+### Added
+- `sync()` function for real-time synchronization of operations via Secure WebSocket
+
 ## 🚀 Version 0.1.0
 ### Added
 - `store()` function for storing data in a circuit context
