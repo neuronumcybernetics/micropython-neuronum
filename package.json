@@ -10,11 +10,7 @@
         "uwebsockets"
     ],
     "urls": {
-        "neuronum-client-lib": "./micropython_neuronum.py", 
-        "uwebsockets": "./uwebsockets" 
-    },
-    "install_paths": {
-        "neuronum-client-lib": "lib/micropython_neuronum.py",
-        "uwebsockets": "lib/uwebsockets"
+        "neuronum-client-lib": "./micropython_neuronum.py",
+        "uwebsockets": "./uwebsockets"
     }
 }
