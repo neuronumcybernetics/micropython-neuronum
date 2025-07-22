@@ -10,8 +10,7 @@ cell = neuronum.Cell(
 STX = "id::stx"
 for operation in cell.sync(STX):  
     txID = operation.get("txID")
-    client = operation.get("operator")                    
-                            
+    client = operation.get("operator")                      
     if txID == "id::tx":             
         data = {
             "json": f"Hello {client}",
