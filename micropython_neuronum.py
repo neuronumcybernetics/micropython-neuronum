@@ -185,3 +185,31 @@ class Cell:
 
         except Exception as e:
             print(f"Request failed: {e}")
+
+
+    def tx_response(self, txID: str, client: str, data: dict):
+        url = f"https://{self.network}/api/tx_response/{txID}"
+
+        tx_response = {
+            "client": client,
+            "data": data,
+            "cell": self.to_dict()
+        }
+
+        try:
+            for _ in range(2):
+                response = requests.post(url, json=tx_response)
+
+                if response.status_code != 200:
+                    print(f"HTTP {response.status_code}: {response.text}")
+                    return
+
+                try:
+                    data = response.json()
+                    print(data["message"])
+                except Exception as e:
+                    print("Failed to parse JSON:", e)
+                    return
+
+        except Exception as e:
+            print(f"Request failed: {e}")
