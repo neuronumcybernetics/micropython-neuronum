@@ -3,6 +3,7 @@ import ujson
 import ssl
 import urequests as requests
 import uwebsockets.client
+import utime
 
 
 class Cell:
@@ -67,30 +68,33 @@ class Cell:
             "synapse": self.synapse,
         }
 
-        try:
-            ws = uwebsockets.client.connect(full_url)
-            print(f"Connecting to {full_url}")
-
-            ws.send(ujson.dumps(auth_payload))
-
+        while True:
             try:
-                while True:
-                    raw_operation = ws.recv()
-                    if raw_operation is None:
-                        print("No data received. Connection might be closed or timed out.")
-                        break
-                    
-                    operation = ujson.loads(raw_operation)
-                    yield operation
+                ws = uwebsockets.client.connect(full_url)
+                print(f"Connecting to {full_url}")
+
+                ws.send(ujson.dumps(auth_payload))
+
+                try:
+                    while True:
+                        raw_operation = ws.recv()
+                        if raw_operation is None:
+                            print("No data received. Connection might be closed or timed out.")
+                            break
+                        
+                        operation = ujson.loads(raw_operation)
+                        yield operation
+
+                except Exception as e:
+                    print(f"Error during data reception: {e}")
+                finally:
+                    ws.close()
+                    print("Connection closed.")
 
             except Exception as e:
-                print(f"Error during data reception: {e}")
-            finally:
-                ws.close()
-                print("Connection closed.")
-
-        except Exception as e:
-            print(f"An error occurred: {e}")
+                print(f"An error occurred: {e}")
+            
+            utime.sleep(3)
 
 
     def activate_tx(self, txID: str, data: dict):
