@@ -20,9 +20,60 @@
 ### **About micropython-neuronum**
 The **MicroPython implementation** of the [Neuronum client library](https://pypi.org/project/neuronum/) — actively developed and tested on ESP32.
 
-### **Installation**
-Ensure your MicroPython device is **connected to Wi-Fi** before installation.
+Firmware:
+MicroPython v1.25.0 on 2025-04-15; Generic ESP32 module with ESP32<br>
+Download and flash your ESP: https://micropython.org/download/ESP32_GENERIC/
 
+### **Installation**
+#### **Connect To Wifi**
+config.json file
+```json
+{
+  "ssid": "your_ssid",
+  "password": "your_password"
+}
+```
+
+boot.py file
+```python
+import network
+import time
+import ujson
+
+
+def connect_to_wifi(ssid, password):
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(True)
+    wlan.connect(ssid, password)
+
+    print(f"Connecting to Wi-Fi: {ssid}")
+    timeout = 30
+    start_time = time.time()
+
+    while not wlan.isconnected() and (time.time() - start_time < timeout):
+        print("Attempting Wi-Fi connection...")
+        time.sleep(1)
+
+    if wlan.isconnected():
+        print("Connected! IP Address:", wlan.ifconfig()[0])
+    else:
+        print("Wi-Fi connection failed. Starting AP mode...")
+
+try:
+    with open("config.json", "r") as f:
+        config = ujson.load(f)
+        ssid = config.get("ssid", "not_assigned")
+        password = config.get("password", "not_assigned")
+        print(f"SSID: {ssid}, Password: {password}")
+except Exception as e:
+    print("Error loading config:", e)
+    ssid, password = "not_assigned", "not_assigned"
+
+
+connect_to_wifi(ssid, password)
+```
+
+#### **Install the MicroPython-Neuronum Library using mip**
 ```python
 import mip
 mip.install("github:neuronumcybernetics/micropython-neuronum")
@@ -33,8 +84,6 @@ This will either create a /lib folder containing or add the following files to a
 - /uwebsockets/client.py
 - /uwebsockets/protocol.py
 
-#### Acknowledgment
-Big shout out to [Danni](https://github.com/danni/uwebsockets) for the awesome `uwebsockets` library—this project wouldn’t be possible without it!
 
 ### **Sync Stream Data in Real Time with your ESP** **[(More Examples Here)](https://github.com/neuronumcybernetics/micropython-neuronum/tree/main/examples)**
 Create, upload, and run this sync.py file on your ESP
