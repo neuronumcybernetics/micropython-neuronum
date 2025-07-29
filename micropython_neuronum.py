@@ -26,37 +26,45 @@ class Cell:
         return f"Cell(host={self.host}, password={self.password}, network={self.network}, synapse={self.synapse})"
 
 
-    def stream(self, label, data, stx=None):
-        try:
-            addr = usocket.getaddrinfo(self.network, 55555)[0][-1]
-            sock = usocket.socket(usocket.AF_INET, usocket.SOCK_STREAM)
-            sock.connect(addr)
+    def stream(self, label, data, stx=None, retry_delay=3):
+        while True:
+            sock = None
+            try:
+                addr = usocket.getaddrinfo(self.network, 55555)[0][-1]
+                sock = usocket.socket(usocket.AF_INET, usocket.SOCK_STREAM)
+                sock.connect(addr)
 
-            sock = ssl.wrap_socket(sock)
+                sock = ssl.wrap_socket(sock)
 
-            credentials = f"{self.host}\n{self.password}\n{self.synapse}\n{stx}\n"
-            sock.send(credentials.encode("utf-8"))
+                credentials = f"{self.host}\n{self.password}\n{self.synapse}\n{stx}\n"
+                sock.send(credentials.encode("utf-8"))
 
-            response = sock.recv(1024).decode("utf-8")
+                response = sock.recv(1024).decode("utf-8")
 
-            if "Authentication successful" not in response:
-                print("Authentication failed")
-                sock.close()
-                return
+                if "Authentication successful" not in response:
+                    print("Authentication failed, retrying...")
+                    sock.close()
+                    return
 
-            stream_payload = ujson.dumps({"label": label, "data": data})
-            sock.send(stream_payload.encode("utf-8"))
-            response_text = sock.recv(1024).decode("utf-8")
-            if response_text == "Sent":
+                stream_payload = ujson.dumps({"label": label, "data": data})
+                sock.send(stream_payload.encode("utf-8"))
+                response_text = sock.recv(1024).decode("utf-8")
+
+                if response_text == "Sent":
                     print(f"Success: {response_text} - {stream_payload}")
-            else:
-                print(f"Error sending: {stream_payload}")
+                    break
+                else:
+                    print(f"Error sending: {stream_payload}")
+                    utime.sleep(retry_delay)
 
-        except Exception as e:
-            print(f"Error: {e}")
+            except Exception as e:
+                print(f"Error: {e}, retrying...")
+                utime.sleep(retry_delay)
 
-        finally:
-            sock.close()
+            finally:
+                if sock:
+                    sock.close()
+
 
 
     def sync(self, stx: str = None):
