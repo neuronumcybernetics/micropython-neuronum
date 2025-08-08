@@ -20,26 +20,43 @@
 ### **About micropython-neuronum**
 The **MicroPython implementation** of the [Neuronum client library](https://pypi.org/project/neuronum/) — actively developed and tested on ESP32.
 
-Firmware:
-MicroPython v1.25.0 on 2025-04-15; Generic ESP32 module with ESP32<br>
+Firmware Version: MicroPython v1.25.0 on 2025-04-15; Generic ESP32 module with ESP32<br>
 Download and flash your ESP: https://micropython.org/download/ESP32_GENERIC/
 
 ### **Installation**
-#### **Connect To Wifi**
-config.json file
+#### **Set configs + connect To Wifi**
+config.json
 ```json
 {
   "ssid": "your_ssid",
-  "password": "your_password"
+  "password": "your_password",
+  "node_id": "your_node_id",
+  "discoverable": true          // true or false
 }
 ```
 
-boot.py file
+boot.py
 ```python
 import network
 import time
 import ujson
+import bluetooth
 
+ble = bluetooth.BLE()
+ble.active(True)
+
+def activate_ble(node_id, discoverable):
+    if discoverable == True:
+        device_name = node_id
+        name_bytes = device_name.encode()
+
+        advertising_payload = bytearray(b'\x02\x01\x06')
+        advertising_payload += bytearray((len(name_bytes) + 1, 0x09)) + name_bytes
+
+        ble.gap_advertise(100_000, advertising_payload)
+        print(f"Node {device_name} discoverable")
+    else:
+        print(f"Node {device_name} not discoverable")
 
 def connect_to_wifi(ssid, password):
     wlan = network.WLAN(network.STA_IF)
@@ -64,13 +81,16 @@ try:
         config = ujson.load(f)
         ssid = config.get("ssid", "not_assigned")
         password = config.get("password", "not_assigned")
-        print(f"SSID: {ssid}, Password: {password}")
+        node_id = config.get("node_id", "not_assigned")
+        discoverable = config.get("discoverable", "not_assigned")
+        print(f"SSID: {ssid}, Password: {password}, Node ID: {node_id}, Discoverable: {discoverable}")
 except Exception as e:
     print("Error loading config:", e)
     ssid, password = "not_assigned", "not_assigned"
 
 
 connect_to_wifi(ssid, password)
+activate_ble(node_id, discoverable)
 ```
 
 #### **Install the MicroPython-Neuronum Library using mip**
