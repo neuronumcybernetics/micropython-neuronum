@@ -31,7 +31,7 @@ config.json
   "ssid": "your_ssid",
   "password": "your_password",
   "node_id": "your_node_id",
-  "discoverable": true          // true or false
+  "discoverable": true
 }
 ```
 
