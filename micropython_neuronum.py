@@ -225,3 +225,34 @@ class Cell:
 
         except Exception as e:
             print(f"Request failed: {e}")
+
+
+    def notify(self, receiver: str, title: str, message: str):
+        full_url = f"https://{self.network}/api/notify"
+
+        notify_payload = {
+            "receiver": receiver,
+            "notification": {
+                "title": title,
+                "message": message
+            },
+            "cell": self.to_dict()
+        }
+
+        try:
+            response = requests.post(full_url, json=notify_payload)
+            if response.status_code != 200:
+                print(f"HTTP {response.status_code}: {response.text}")
+                return
+
+            try:
+                response_data = response.json()
+            except Exception as e:
+                print("Failed to parse JSON:", e)
+                return
+
+            print(f"Response from Neuronum: {response_data}")
+            return response_data
+
+        except Exception as e:
+            print(f"Request failed: {e}")

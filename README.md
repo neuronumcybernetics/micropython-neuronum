@@ -1,7 +1,7 @@
 <h1 align="center">
   <img src="https://neuronum.net/static/neuronum.svg" alt="Neuronum" width="80">
 </h1>
-<h4 align="center">The MicroPython implementation of the Neuronum client library</h4>
+<h4 align="center">MicroPython Implementation of the Neuronum Data Engine</h4>
 
 <p align="center">
   <a href="https://neuronum.net">
@@ -18,7 +18,7 @@
 ---
 
 ### **About micropython-neuronum**
-The **MicroPython implementation** of the [Neuronum client library](https://pypi.org/project/neuronum/) — actively developed and tested on ESP32.
+The **MicroPython implementation** of the [Neuronum Data Engine](https://pypi.org/project/neuronum/) — actively developed and tested on ESP32.
 
 Firmware Version: MicroPython v1.25.0 on 2025-04-15; Generic ESP32 module with ESP32<br>
 Download and flash your ESP: https://micropython.org/download/ESP32_GENERIC/
